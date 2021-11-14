@@ -27,9 +27,13 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class QrReaderFragment extends Fragment implements ZXingScannerView.ResultHandler {
+
+    //region Components
     private NavController navController;
     private FragmentQrReaderBinding binding;
+    //endregion
 
+    //region Life Cycle
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -85,7 +89,9 @@ public class QrReaderFragment extends Fragment implements ZXingScannerView.Resul
         super.onPause();
         binding.viewCodeScanner.stopCamera();           // Stop camera on pause
     }
+    //endregion
 
+    //region Override Lib
     @Override
     public void handleResult(Result rawResult) {
         AssetsListQrReaderViewModel assetsListQrReaderViewModel = new ViewModelProvider(requireActivity()).get(AssetsListQrReaderViewModel.class);
@@ -93,6 +99,7 @@ public class QrReaderFragment extends Fragment implements ZXingScannerView.Resul
         navController.navigateUp();
         binding.viewCodeScanner.resumeCameraPreview(this);
     }
+    //endregion
 
 }
 
